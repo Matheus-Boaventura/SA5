@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Remover Dado</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Remover Dado</h1>
+        <p>Tem certeza de que deseja remover o seguinte dado?</p>
+        <p><strong>Nome:</strong> {{ dado.nome }}</p>
+        <p><strong>E-mail:</strong> {{ dado.email }}</p>
+        <p><strong>Telefone:</strong> {{ dado.telefone }}</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirmar Remoção</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

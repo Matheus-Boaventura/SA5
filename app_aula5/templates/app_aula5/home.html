@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="jumbotron bg-light">
+        <h1 class="display-4">Cadastro GlobalTalent Connect</h1>
+        <p class="lead">Insira seus dados</p>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome:</label>
+                <input type="text" name="nome" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail:</label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="telefone" class="form-label">Telefone:</label>
+                <input type="tel" name="telefone" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="data_nascimento" class="form-label">Data de Nascimento:</label>
+                <input type="date" name="data_nascimento" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="pais" class="form-label">País:</label>
+                <input type="text" name="pais" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+
+        <!-- Adicionando campo de pesquisa -->
+        
+
+    {% if dados %}
+        <div>
+            <h2 class="mt-5">Dados obtidos</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Data de Nascimento</th>
+                    <th scope="col">País</th>
+                    <th scope="col">Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for dado in dados %}
+                    <tr>
+                        <td>{{ dado.nome }}</td>
+                        <td>{{ dado.email }}</td>
+                        <td>{{ dado.telefone }}</td>
+                        <td>{{ dado.data_nascimento }}</td>
+                        <td>{{ dado.pais }}</td>
+                        <td>
+                            <a href="{% url 'update_dado' dado.id %}" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{% url 'remove_dado' dado.id %}" class="btn btn-danger btn-sm">Remover</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
